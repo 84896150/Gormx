@@ -25,7 +25,7 @@ type Transaction interface {
 
 // Data .
 type Data struct {
-	db *gorm.DB
+	DB *gorm.DB
 }
 
 type contextTxKey struct{}
