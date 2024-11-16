@@ -3,10 +3,7 @@ module github.com/84896150/Gormx
 go 1.23.2
 
 require (
-	github.com/go-kratos/kratos/v2 v2.8.0
-	github.com/go-redsync/redsync/v4 v4.13.0
 	github.com/pkg/errors v0.9.1
-	github.com/redis/go-redis/v9 v9.6.1
 	gorm.io/gorm v1.25.12
 )
 
