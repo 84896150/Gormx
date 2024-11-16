@@ -2,14 +2,8 @@ package gormx
 
 import (
 	"context"
-	"time"
-
-	"github.com/go-kratos/kratos/v2/registry"
-
-	"github.com/go-kratos/kratos/v2/log"
-	"github.com/go-redsync/redsync/v4"
-	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
+	"time"
 )
 
 type DataBaseSoftDelete int8
@@ -32,10 +26,6 @@ type Transaction interface {
 // Data .
 type Data struct {
 	GORMDB *gorm.DB
-	H      *log.Helper
-	RDBS   *redis.Client
-	RS     *redsync.Redsync
-	DIS    registry.Discovery
 }
 
 type contextTxKey struct{}
@@ -49,10 +39,6 @@ func (d *Data) DB(ctx context.Context) *gorm.DB {
 	return d.GORMDB.WithContext(ctx)
 }
 
-func (d *Data) RDB() *redis.Client {
-	return d.RDBS
-}
-
 // InTx fn是包含了事务操作的方法，只要fn里面有异常，里面的db操作都会回滚
 func (d *Data) InTx(ctx context.Context, fn func(ctx context.Context) error) error {
 	return d.GORMDB.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
@@ -64,12 +50,4 @@ func (d *Data) InTx(ctx context.Context, fn func(ctx context.Context) error) err
 // NewTransaction .
 func NewTransaction(d *Data) Transaction {
 	return d
-}
-
-func (d *Data) WithRegistry(dis registry.Discovery) {
-	d.DIS = dis
-}
-
-func (d *Data) GetRegistry() registry.Discovery {
-	return d.DIS
 }
