@@ -3,12 +3,6 @@ package gormx
 import (
 	"context"
 	"time"
-
-	"github.com/go-kratos/kratos/v2/registry"
-
-	"github.com/go-kratos/kratos/v2/log"
-	"github.com/go-redsync/redsync/v4"
-	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 )
 
