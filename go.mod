@@ -1,4 +1,4 @@
-module github/flandersRin/gormx
+module github.com/84896150/Gormx
 
 go 1.23.2
 
